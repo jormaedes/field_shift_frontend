@@ -1,9 +1,11 @@
 "use client";
 
-import { Ruler } from "lucide-react";
+import { CloudRain, Droplets, Leaf, Ruler } from "lucide-react";
 import { useLanguage } from "@/components/language-provider";
 import { Container } from "./container";
 import { SectionLabel } from "./section-label";
+
+const dataIcons = [CloudRain, Droplets, Leaf];
 
 export function DataSources() {
   const { t } = useLanguage();
@@ -15,7 +17,7 @@ export function DataSources() {
         <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-5">
             <SectionLabel>{data.label}</SectionLabel>
-            <h2 className="mt-5 max-w-md font-display text-3xl leading-[1.08] tracking-[-0.01em] text-brand-900 sm:text-4xl">
+            <h2 className="mt-5 max-w-md font-display text-4xl leading-[1.04] text-brand-900 sm:text-5xl">
               {data.title}
             </h2>
           </div>
@@ -24,28 +26,33 @@ export function DataSources() {
           </p>
         </div>
 
-        <div className="mt-12 border-t border-brand-900/15">
-          {data.items.map((item, index) => (
-            <article
-              key={item.name}
-              className="grid gap-3 border-b border-brand-900/15 py-7 sm:grid-cols-12 sm:items-baseline sm:gap-8"
-            >
-              <div className="sm:col-span-4">
-                <p className="font-mono text-[10px] text-solo-600">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-                <h3 className="mt-1.5 font-display text-xl text-brand-900">
-                  {item.name}
-                </h3>
-                <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-brand-900/45">
+        <div className="mt-12 grid border-y border-brand-900/15 md:grid-cols-3">
+          {data.items.map((item, index) => {
+            const Icon = dataIcons[index] ?? Leaf;
+
+            return (
+              <article
+                key={item.name}
+                className="border-b border-brand-900/15 py-7 md:border-b-0 md:px-6 md:py-8 md:first:pl-0 md:last:pr-0 md:not-last:border-r md:not-last:border-brand-900/15"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[10px] text-solo-600">
+                    0{index + 1}
+                  </span>
+                  <Icon aria-hidden className="size-5 text-brand-700" />
+                </div>
+                <p className="mt-6 font-mono text-[10px] uppercase text-brand-900/55">
                   {item.source}
                 </p>
-              </div>
-              <p className="text-sm leading-relaxed text-brand-900/70 sm:col-span-7 sm:col-start-6 sm:text-[15px]">
-                {item.text}
-              </p>
-            </article>
-          ))}
+                <h3 className="mt-2 font-display text-2xl leading-tight text-brand-900">
+                  {item.name}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-brand-900/70">
+                  {item.text}
+                </p>
+              </article>
+            );
+          })}
         </div>
 
         <p className="mt-7 flex max-w-3xl items-start gap-2.5 text-xs leading-relaxed text-brand-900/60">

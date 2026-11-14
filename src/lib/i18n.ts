@@ -30,9 +30,11 @@ export type LandingCopy = {
   };
   nav: {
     label: string;
-    how: string;
-    data: string;
-    limits: string;
+    tagline: string;
+    home: string;
+    about: string;
+    features: string;
+    benefits: string;
     cta: string;
   };
   hero: {
@@ -117,10 +119,12 @@ const pt: LandingCopy = {
   },
   nav: {
     label: "Navegação principal",
-    how: "Como funciona",
-    data: "Dados da NASA",
-    limits: "Limitações",
-    cta: "Começar análise",
+    tagline: "Decisões inteligentes para uma agricultura sustentável",
+    home: "Início",
+    about: "Sobre",
+    features: "Funcionalidades",
+    benefits: "Benefícios",
+    cta: "Começar",
   },
   hero: {
     eyebrow: "NASA Space Apps Challenge 2026 · Desafio 7 — Field Shift",
@@ -276,10 +280,12 @@ const en: LandingCopy = {
   },
   nav: {
     label: "Main navigation",
-    how: "How it works",
-    data: "NASA data",
-    limits: "Limitations",
-    cta: "Start analysis",
+    tagline: "Smarter decisions for sustainable agriculture",
+    home: "Home",
+    about: "About",
+    features: "Features",
+    benefits: "Benefits",
+    cta: "Get started",
   },
   hero: {
     eyebrow: "NASA Space Apps Challenge 2026 · Challenge 7 — Field Shift",

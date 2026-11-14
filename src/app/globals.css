@@ -64,3 +64,29 @@
     }
   }
 }
+
+.hero-image-shade {
+  background:
+    linear-gradient(90deg, rgb(15 34 19 / 0.84) 0%, rgb(15 34 19 / 0.62) 43%, rgb(15 34 19 / 0.12) 100%),
+    linear-gradient(0deg, rgb(15 34 19 / 0.56) 0%, transparent 58%);
+}
+
+@keyframes hero-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-reveal {
+  animation: hero-reveal 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-reveal-late {
+  animation: hero-reveal 850ms cubic-bezier(0.2, 0.7, 0.2, 1) 120ms both;
+}

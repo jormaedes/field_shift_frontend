@@ -23,17 +23,19 @@ export default function Home() {
         {t.a11y.skipToContent}
       </a>
 
-      <SiteHeader />
+      <div className="relative flex-1">
+        <SiteHeader overlay />
 
-      <main id="conteudo" className="flex-1">
-        <Hero />
-        <Statement />
-        <Steps />
-        <Strategies />
-        <DataSources />
-        <Limits />
-        <FinalCta />
-      </main>
+        <main id="conteudo">
+          <Hero />
+          <Statement />
+          <Steps />
+          <Strategies />
+          <DataSources />
+          <Limits />
+          <FinalCta />
+        </main>
+      </div>
 
       <SiteFooter />
     </>

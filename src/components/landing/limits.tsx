@@ -12,15 +12,15 @@ export function Limits() {
   const { limits } = t;
 
   return (
-    <section id="limitacoes" className="scroll-mt-24 bg-brand-900 text-canvas">
+    <section id="limitacoes" className="scroll-mt-24 bg-solo-900 text-canvas">
       <Container className="py-16 sm:py-20 lg:py-24">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
           <div className="lg:col-span-4">
             <SectionLabel tone="dark">{limits.label}</SectionLabel>
-            <h2 className="mt-5 max-w-xs font-display text-3xl leading-[1.08] tracking-[-0.01em] sm:text-4xl">
+            <h2 className="mt-5 max-w-xs font-display text-4xl leading-[1.04] sm:text-5xl">
               {limits.title}
             </h2>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-sage-200/80">
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/75">
               {limits.lead}
             </p>
           </div>
@@ -32,10 +32,10 @@ export function Limits() {
               return (
                 <li
                   key={item}
-                  className="border-t border-canvas/20 pt-4"
+                  className="border-t border-canvas/25 pt-4"
                 >
                   <Icon aria-hidden className="size-5 text-solo-200" />
-                  <p className="mt-3 text-sm leading-relaxed text-sage-200/90">
+                  <p className="mt-3 text-sm leading-relaxed text-white/90">
                     {item}
                   </p>
                 </li>
@@ -44,7 +44,7 @@ export function Limits() {
           </ul>
         </div>
 
-        <p className="mt-12 flex max-w-3xl items-start gap-2.5 border-t border-canvas/15 pt-6 text-xs leading-relaxed text-sage-200/70">
+        <p className="mt-12 flex max-w-3xl items-start gap-2.5 border-t border-canvas/20 pt-6 text-xs leading-relaxed text-white/75">
           <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-solo-200" />
           {limits.footnote}
         </p>
