@@ -745,7 +745,7 @@ export function DashboardClient() {
               cameraCenter={cameraCenter}
               onMapSelect={handleMapSelect}
             />
-            <div className="pointer-events-none absolute inset-x-3 top-3 z-500 flex items-start justify-between gap-2 sm:inset-x-4 sm:top-4">
+            <div className="pointer-events-none absolute inset-x-3 top-3 z-[500] flex items-start justify-between gap-2 sm:inset-x-4 sm:top-4">
               <div className="rounded-lg border border-white/80 bg-white/95 px-3 py-2 shadow-sm backdrop-blur-sm">
                 <p className="flex items-center gap-2 text-xs font-semibold text-brand-900">
                   <Satellite aria-hidden className="size-4 text-brand-700" />
@@ -763,7 +763,7 @@ export function DashboardClient() {
               </button>
             </div>
 
-            <div className="absolute bottom-20 left-3 z-500 flex max-w-[calc(100%-2rem)] flex-wrap items-center gap-2 sm:bottom-10 sm:left-4">
+            <div className="absolute bottom-20 left-3 z-[500] flex max-w-[calc(100%-2rem)] flex-wrap items-center gap-2 sm:bottom-10 sm:left-4">
               <button
                 type="button"
                 onClick={() => { setDrawing(false); setDraftPositions([]); setPoint(null); setPolygon(null); }}
@@ -800,12 +800,12 @@ export function DashboardClient() {
               )}
             </div>
             {drawing && (
-              <p className="absolute bottom-36 left-3 z-500 max-w-xs rounded-lg bg-brand-900/90 px-3 py-2 text-[11px] leading-relaxed text-white shadow-sm sm:bottom-22 sm:left-4">
+              <p className="absolute bottom-36 left-3 z-[500] max-w-xs rounded-lg bg-brand-900/90 px-3 py-2 text-[11px] leading-relaxed text-white shadow-sm sm:bottom-22 sm:left-4">
                 {text.drawing}
               </p>
             )}
             {locationMessage && (
-              <p role="status" className="absolute right-3 top-[4.8rem] z-500 max-w-[min(22rem,calc(100%-1.5rem))] rounded-lg border border-white/80 bg-white/95 px-3 py-2 text-[11px] leading-relaxed text-brand-900 shadow-sm sm:right-4">
+              <p role="status" className="absolute right-3 top-[4.8rem] z-[500] max-w-[min(22rem,calc(100%-1.5rem))] rounded-lg border border-white/80 bg-white/95 px-3 py-2 text-[11px] leading-relaxed text-brand-900 shadow-sm sm:right-4">
                 {locationMessage}
               </p>
             )}

@@ -103,7 +103,7 @@ export function MapView({
     } else if (draftPositions.length > 0) {
       const positions = draftPositions.map(toLeafletPosition);
       if (positions.length > 1) {
-        L.polyline(positions, { color: "#d79a5b", dashArray: "7 7", weight: 3 }).addTo(selectionLayer);
+        L.polyline(positions, { color: "#d79a5b", dashArray: "7 7", weight: 3, interactive: false }).addTo(selectionLayer);
       }
       positions.forEach((position, index) => {
         L.circleMarker(position, {
@@ -112,6 +112,7 @@ export function MapView({
           fillColor: "#8b5e3c",
           fillOpacity: 1,
           weight: 2,
+          interactive: false,
         }).addTo(selectionLayer);
       });
     } else if (point) {
@@ -121,6 +122,7 @@ export function MapView({
         fillColor: "#26422d",
         fillOpacity: 1,
         weight: 3,
+        interactive: false,
       }).addTo(selectionLayer);
     }
 
@@ -128,8 +130,13 @@ export function MapView({
 
   return (
     <div
-      ref={containerRef}
-      className={`h-full min-h-90 w-full bg-[#dce5d8] ${drawing ? "cursor-crosshair" : ""}`}
-    />
+      className={`relative h-full min-h-90 w-full bg-[#dce5d8] ${
+        drawing
+          ? "cursor-crosshair [&_.leaflet-container]:!cursor-crosshair [&_.leaflet-grab]:!cursor-crosshair [&_.leaflet-interactive]:!cursor-crosshair"
+          : ""
+      }`}
+    >
+      <div ref={containerRef} className="h-full w-full" />
+    </div>
   );
 }
