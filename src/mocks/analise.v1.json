@@ -1,0 +1,96 @@
+{
+  "id": "demo",
+  "estado": "concluida",
+  "versao_analise": 1,
+  "local": {
+    "latitude": -12.78,
+    "longitude": 15.74,
+    "area_ha": 2.5
+  },
+  "condicoes": {
+    "chuva_mensal": [
+      {
+        "mes": "2026-10",
+        "historico_mm": 90,
+        "atual_mm": 70
+      }
+    ],
+    "inicio_epoca": {
+      "data_tipica": "2026-10-15",
+      "por_ano": []
+    },
+    "humidade_solo": {
+      "valor": 0.35,
+      "normal": 0.42,
+      "escala": "0 a 1"
+    },
+    "campo_nu": [],
+    "declive": null
+  },
+  "estado_epoca": null,
+  "estrategias": [
+    {
+      "id": "A",
+      "nome": "Rotação atual (referência) — demonstração",
+      "sequencia": [],
+      "pontuacao": null,
+      "pontuacao_por_criterio": null,
+      "confianca": "baixa",
+      "porque": "Texto fictício para demonstrar a interface; não constitui recomendação agrícola.",
+      "evidencia": "Não existem dados reais neste modo de demonstração.",
+      "beneficios": "A avaliar com dados reais do serviço.",
+      "lacunas": "O modo de demonstração não inclui cálculo agronómico nem dados reais do terreno.",
+      "riscos": "Não utilizar este exemplo para tomar decisões agrícolas.",
+      "fontes": ["Amostra fictícia do contrato de exemplo"]
+    },
+    {
+      "id": "B",
+      "nome": "Alternativa B — demonstração",
+      "sequencia": [],
+      "pontuacao": null,
+      "pontuacao_por_criterio": null,
+      "confianca": "baixa",
+      "porque": "Texto fictício para demonstrar a interface; não constitui recomendação agrícola.",
+      "evidencia": "Não existem dados reais neste modo de demonstração.",
+      "beneficios": "A avaliar com dados reais do serviço.",
+      "lacunas": "O modo de demonstração não inclui cálculo agronómico nem dados reais do terreno.",
+      "riscos": "Não utilizar este exemplo para tomar decisões agrícolas.",
+      "fontes": ["Amostra fictícia do contrato de exemplo"]
+    },
+    {
+      "id": "C",
+      "nome": "Alternativa C — demonstração",
+      "sequencia": [],
+      "pontuacao": null,
+      "pontuacao_por_criterio": null,
+      "confianca": "baixa",
+      "porque": "Texto fictício para demonstrar a interface; não constitui recomendação agrícola.",
+      "evidencia": "Não existem dados reais neste modo de demonstração.",
+      "beneficios": "A avaliar com dados reais do serviço.",
+      "lacunas": "O modo de demonstração não inclui cálculo agronómico nem dados reais do terreno.",
+      "riscos": "Não utilizar este exemplo para tomar decisões agrícolas.",
+      "fontes": ["Amostra fictícia do contrato de exemplo"]
+    }
+  ],
+  "cuidados": null,
+  "premissas": [
+    {
+      "id": "tipo_solo",
+      "nome": "Tipo de solo",
+      "valor": "nao_sei",
+      "tipo": "select",
+      "opcoes": ["arenoso", "franco", "argiloso", "nao_sei"],
+      "origem": "agricultor",
+      "estado": "por_validar",
+      "editavel": true
+    }
+  ],
+  "metadados": {
+    "fontes": ["NASA POWER", "MODIS (ORNL DAAC)"],
+    "resolucoes": "Chuva e humidade do solo: célula de cerca de 50 km. Vegetação: 250 m.",
+    "datas_dados": "Amostra de interface; valores fictícios, não são dados reais.",
+    "avisos": [
+      "MODO DE DEMONSTRAÇÃO: os valores exibidos são fictícios e não constituem recomendações agrícolas."
+    ]
+  }
+}
