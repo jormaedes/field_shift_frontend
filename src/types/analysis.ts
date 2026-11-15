@@ -80,3 +80,22 @@ export type AnalysisResponse = {
   } | null;
   erro?: { codigo?: string; mensagem?: string } | null;
 };
+
+export type Crop = {
+  id: string;
+  nome: string;
+  name_pt?: string;
+  scientific_name?: string;
+  botanical_family?: string;
+  role_in_rotation?: string;
+  nitrogen_impact?: string;
+  nitrogen_fixation_kg_ha?: number;
+};
+
+export type CropsResponse = {
+  metadata?: {
+    region?: string;
+    source?: string;
+  };
+  crops: Crop[];
+};

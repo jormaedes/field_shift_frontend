@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AlertCircle,
   ArrowLeft,
@@ -26,9 +26,9 @@ import {
 } from "lucide-react";
 import { LanguageToggle } from "@/components/language-toggle";
 import { useLanguage } from "@/components/language-provider";
-import { AnalysisApiError, createAnalysis, waitForAnalysis } from "@/lib/api";
+import { AnalysisApiError, createAnalysis, getCrops, waitForAnalysis } from "@/lib/api";
 import { createPolygonFeature, measurePolygon, type GeoPosition, type PolygonFeature } from "@/lib/geo";
-import type { AnalysisInput, AnalysisRequest, AnalysisResponse, Strategy } from "@/types/analysis";
+import type { AnalysisInput, AnalysisRequest, AnalysisResponse, Crop, Strategy } from "@/types/analysis";
 
 const MapCanvas = dynamic(
   () => import("@/components/map/map-view").then((module) => module.MapView),
@@ -408,7 +408,11 @@ function AnalysisResults({ analysis, text, lang }: { analysis: AnalysisResponse;
   const allRain = rainfall.flatMap((item) => [item.historico_mm, item.atual_mm].filter((value): value is number => value !== null));
   const maxRain = Math.max(...allRain, 0);
   const moisture = analysis.condicoes?.humidade_solo;
-  const strategies = analysis.estrategias ?? [];
+  const strategies = [...(analysis.estrategias ?? [])].sort((a, b) => {
+    if (a.id === "A") return -1;
+    if (b.id === "A") return 1;
+    return a.id.localeCompare(b.id);
+  });
   const assumptions = analysis.premissas ?? [];
 
   function displayAssumptionValue(value: string | number | boolean | null) {
@@ -478,7 +482,9 @@ function AnalysisResults({ analysis, text, lang }: { analysis: AnalysisResponse;
                 <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-solo-600" />{text.current}</span>
               </div>
               {rainfall.map((month) => {
-                const monthLabel = new Intl.DateTimeFormat(lang === "pt" ? "pt-PT" : "en-GB", { month: "short", year: "numeric" }).format(new Date(`${month.mes}-01T12:00:00`));
+                const monthLabel = month.mes.includes("-")
+                  ? new Intl.DateTimeFormat(lang === "pt" ? "pt-PT" : "en-GB", { month: "short", year: "numeric" }).format(new Date(`${month.mes}-01T12:00:00`))
+                  : month.mes;
                 return (
                   <div key={month.mes} className="grid grid-cols-[4.5rem_1fr_auto] items-center gap-x-3 gap-y-1.5">
                     <span className="row-span-2 text-[10px] capitalize text-brand-900/65">{monthLabel}</span>
@@ -582,6 +588,19 @@ export function DashboardClient() {
   const [phase, setPhase] = useState<"form" | "analyzing" | "error" | "result">("form");
   const [analysis, setAnalysis] = useState<AnalysisResponse | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const [availableCrops, setAvailableCrops] = useState<Crop[]>([]);
+
+  useEffect(() => {
+    getCrops()
+      .then((crops) => {
+        if (crops && crops.length > 0) {
+          setAvailableCrops(crops);
+        }
+      })
+      .catch(() => {
+        // Falha silenciosa: inputs mantêm comportamento livre
+      });
+  }, []);
 
   const measurement = polygon ? measurePolygon(polygon) : null;
   const selectedPosition = measurement?.point ?? point;
@@ -883,10 +902,18 @@ export function DashboardClient() {
                       </div>
                     </fieldset>
 
+                    {availableCrops.length > 0 && (
+                      <datalist id="crops-list">
+                        {availableCrops.map((crop) => (
+                          <option key={crop.id} value={crop.nome} />
+                        ))}
+                      </datalist>
+                    )}
+
                     {hasCropNow === true && (
                       <div>
                         <FieldLabel htmlFor="current-crop">{text.cropNow}</FieldLabel>
-                        <input id="current-crop" value={currentCrop} onChange={(event) => setCurrentCrop(event.target.value)} placeholder={text.cropNowPlaceholder} className="min-h-11 w-full rounded-lg border border-brand-900/15 bg-white px-3 text-sm text-brand-900 placeholder:text-brand-900/40 focus:border-brand-700 focus:outline-none" />
+                        <input id="current-crop" list="crops-list" value={currentCrop} onChange={(event) => setCurrentCrop(event.target.value)} placeholder={text.cropNowPlaceholder} className="min-h-11 w-full rounded-lg border border-brand-900/15 bg-white px-3 text-sm text-brand-900 placeholder:text-brand-900/40 focus:border-brand-700 focus:outline-none" />
                         <FieldLabel htmlFor="plant-date" >{text.plantDate}</FieldLabel>
                         <input id="plant-date" type="date" value={plantDate} onChange={(event) => setPlantDate(event.target.value)} className="min-h-11 w-full rounded-lg border border-brand-900/15 bg-white px-3 text-sm text-brand-900 focus:border-brand-700 focus:outline-none" />
                       </div>
@@ -894,7 +921,7 @@ export function DashboardClient() {
                     {hasCropNow === false && (
                       <div>
                         <FieldLabel htmlFor="usual-crop">{text.usualCrop}</FieldLabel>
-                        <input id="usual-crop" value={usualCrop} onChange={(event) => setUsualCrop(event.target.value)} placeholder={text.usualCropPlaceholder} className="min-h-11 w-full rounded-lg border border-brand-900/15 bg-white px-3 text-sm text-brand-900 placeholder:text-brand-900/40 focus:border-brand-700 focus:outline-none" />
+                        <input id="usual-crop" list="crops-list" value={usualCrop} onChange={(event) => setUsualCrop(event.target.value)} placeholder={text.usualCropPlaceholder} className="min-h-11 w-full rounded-lg border border-brand-900/15 bg-white px-3 text-sm text-brand-900 placeholder:text-brand-900/40 focus:border-brand-700 focus:outline-none" />
                       </div>
                     )}
 
