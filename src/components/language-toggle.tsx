@@ -4,8 +4,8 @@ import type { Lang } from "@/lib/i18n";
 import { useLanguage } from "./language-provider";
 
 const options: { value: Lang; short: string }[] = [
-  { value: "pt", short: "PT" },
   { value: "en", short: "EN" },
+  { value: "pt", short: "PT" },
 ];
 
 export function LanguageToggle() {

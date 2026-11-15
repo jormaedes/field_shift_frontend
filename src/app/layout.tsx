@@ -30,13 +30,13 @@ export const metadata: Metadata = {
   },
   applicationName: "NATERRA",
   description:
-    "Compare três estratégias de rotação de culturas com dados da NASA. A ferramenta apoia a decisão do agricultor e não substitui o conhecimento local.",
+    "Compare three crop rotation strategies with NASA Earth observation data. This tool supports farmer decision-making and does not replace local knowledge.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="pt-PT"
+      lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-canvas text-ink">

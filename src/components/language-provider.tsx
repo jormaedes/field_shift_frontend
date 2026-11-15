@@ -14,7 +14,7 @@ const STORAGE_KEY = "naterra.lang";
 
 // Guardamos apenas a preferência de idioma (não é dado pessoal).
 // useSyncExternalStore evita o descompasso de hidratação: o servidor
-// renderiza sempre em PT e o cliente atualiza para a escolha guardada.
+// renderiza por predefinição em EN e o cliente atualiza para a escolha guardada.
 const listeners = new Set<() => void>();
 
 function subscribe(listener: () => void) {
@@ -29,14 +29,15 @@ function subscribe(listener: () => void) {
 
 function getSnapshot(): Lang {
   try {
-    return window.localStorage.getItem(STORAGE_KEY) === "en" ? "en" : "pt";
+    const saved = window.localStorage.getItem(STORAGE_KEY);
+    return saved === "pt" ? "pt" : "en";
   } catch {
-    return "pt";
+    return "en";
   }
 }
 
 function getServerSnapshot(): Lang {
-  return "pt";
+  return "en";
 }
 
 type LanguageContextValue = {
